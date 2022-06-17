@@ -1,0 +1,5 @@
+# ninja log v5
+510	627	1654686969000000000	ft_containers	f28fdb555b765ecf
+1	509	1654686969000000000	CMakeFiles/ft_containers.dir/ft_main.cpp.o	2794ef4256a1ff2c
+0	140	1655485041000000000	build.ninja	c32bfe6687a54f43
+2	574	1654593765000000000	CMakeFiles/ft_containers.dir/std_main.cpp.o	459561405d8f5136
