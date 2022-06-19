@@ -78,7 +78,7 @@ namespace ft {
 		//_3_Capacity
 		size_type size() const{ return (this->_size); };
 		size_type max_size() const{ return (this->allocator.max_size()); }; //максимально возможный размер выделенной памяти
-		size_type capacity() const { return (_capacity); };
+		size_type capacity() const { return (this->_capacity); };
 		bool empty() const{ return (this->_size == 0); };
 
 
@@ -143,13 +143,13 @@ namespace ft {
 
 		//Элементы доступа с защитой
 		reference at(size_type i){
-			if (i > _capacity){
+			if (i >= _size){
 				throw std::out_of_range("index out of range");
 			}
 			return (*(_start + i));
 		};
 		const_reference at(size_type i) const{
-			if (i > _capacity){
+			if (i >= _size){
 				throw std::out_of_range("index out of range");
 			}
 			return (*(_start + i));
