@@ -7,6 +7,7 @@
 
 #include "iostream"
 #include "memory"
+#include "../iterators/reverse_iterator.hpp"
 
 namespace ft {
 	template<class T,class Allocator = std::allocator<T> >
@@ -23,10 +24,10 @@ namespace ft {
 		typedef typename Allocator::reference       reference;
 		typedef typename Allocator::const_reference const_reference;
 
-        typedef RandomAccessIterator<value_type> iterator;
-        typedef RandomAccessIterator<const value_type> const_iterator;
-        typedef reverse_iterator<const_iterator> const_reverse_iterator;
-        typedef reverse_iterator<iterator> reverse_iterator;
+        typedef ft::random_access_iterator<value_type> iterator;
+        typedef ft::random_access_iterator<const value_type> const_iterator;
+        typedef ft::ReverseIterator<const_iterator> const_reverse_iterator;
+        typedef ft::ReverseIterator<iterator> reverse_iterator;
 
 		//_2_Constructors and destructors
 		explicit vector(const allocator_type& alloc = allocator_type()):
@@ -46,6 +47,18 @@ namespace ft {
 		};
 
 		vector(const vector& right):_size(0), _capacity(0) { *this = right; };
+
+        template<class InputIter>
+        vector(InputIter input1, InputIter second, const allocator_type & alloc = allocator_type(), typename enable_if<!is_integral<InputIter>::value>::type* = 0): _alloc(alloc){
+            if (input1 > second)
+                throw std::length_error("vector");
+            _size = second - input1;
+            _capacity = _size;
+            _start = _alloc.allocate(_capacity);
+            for(difference_type i = 0; i < static_cast<difference_type>(_size); i++){
+                _alloc.construct(_start + i, *(input1 + i));
+            }
+        }
 
 		~vector(){
 			for (size_type i = 0; i < _size; i++){
@@ -152,6 +165,16 @@ namespace ft {
 			}
 			return (*(_start + i));
 		};
+
+        // Iterators
+        iterator begin() {return (iterator(_start)); };                                           //итератор на первый элемент
+        const_iterator begin() const { return(const_iterator(_start)); };                         // конст итератор на первый элемент
+        iterator end(){ return(iterator(_start + _size)); };                                      // итератор на последний элемент
+        const_iterator end() const { return(const_iterator(_start + _size)); };                   // конст итератор на последний элемент
+        reverse_iterator rbegin(){ return (reverse_iterator(this->end())); };                     // реверс итератор на конец
+        const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->end())); };  // конст реверс итератор на конец
+        reverse_iterator rend(){ return (reverse_iterator(this->begin())); };                     // итератор на первый элемент
+        const_reverse_iterator rend() const { return (const_reverse_iterator(this->begin())); };  // конст итератор на первый элемент
 
 		//_4_Modifiers:
 

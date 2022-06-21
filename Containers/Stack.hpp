@@ -5,11 +5,10 @@
 #ifndef FT_CONTAINERS_STACK_HPP
 #define FT_CONTAINERS_STACK_HPP
 
-#include "vector"
-#include "memory"
+#include "Vector.hpp"
 
 namespace ft {
-	template < class Type, class Container = std::vector <Type> >
+	template < class Type, class Container = ft::vector <Type> >
 	class stack {
 	protected:
 		Container _c;
@@ -22,9 +21,7 @@ namespace ft {
 		explicit stack(const Container &cont = Container()): _c(cont) {}
 //		explicit stack(const Container& = Container()){};
 		stack(const stack<Type, Container>& other_cont): _c(other_cont._c) {}
-		~stack() {
-			_c.clear();
-		}
+		~stack() { _c.clear(); }
 
 		bool                empty() const               { return _c.empty(); }
 		size_type           size() const                { return _c.size(); }

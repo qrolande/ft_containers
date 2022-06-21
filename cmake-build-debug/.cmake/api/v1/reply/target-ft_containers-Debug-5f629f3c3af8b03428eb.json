@@ -86,7 +86,10 @@
 			"sourceIndexes" : 
 			[
 				0,
-				2
+				2,
+				3,
+				4,
+				5
 			]
 		},
 		{
@@ -113,6 +116,21 @@
 		{
 			"backtrace" : 1,
 			"path" : "Containers/Vector.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "iterators/iterator_traits.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "iterators/random_access_iterator.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "iterators/reverse_iterator.hpp",
 			"sourceGroupIndex" : 0
 		}
 	],
