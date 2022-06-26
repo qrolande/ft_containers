@@ -5,17 +5,17 @@
 #ifndef FT_CONTAINERS_REVERSE_ITERATOR_HPP
 #define FT_CONTAINERS_REVERSE_ITERATOR_HPP
 
-#include "../iterators/IteratorTraits.hpp"
+#include "IteratorTraits.hpp"
 
 namespace ft{
     template <class Iter> class ReverseIterator {
     public:
         typedef Iter iterator_type;
-        typedef typename IteratorTraits <Iter>::iterator_category iterator_category;
-        typedef typename IteratorTraits <Iter>::value_type value_type;
-        typedef typename IteratorTraits <Iter>::difference_type difference_type;
-        typedef typename IteratorTraits <Iter>::pointer pointer;
-        typedef typename IteratorTraits <Iter>::reference reference;
+        typedef typename ft::IteratorTraits <Iter>::iterator_category iterator_category;
+        typedef typename ft::IteratorTraits <Iter>::value_type value_type;
+        typedef typename ft::IteratorTraits <Iter>::difference_type difference_type;
+        typedef typename ft::IteratorTraits <Iter>::pointer pointer;
+        typedef typename ft::IteratorTraits <Iter>::reference reference;
     private:
         iterator_type current_iter;
     public:

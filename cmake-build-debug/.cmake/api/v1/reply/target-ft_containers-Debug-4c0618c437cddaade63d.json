@@ -120,7 +120,7 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "iterators/iterator_traits.hpp",
+			"path" : "iterators/IteratorTraits.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
