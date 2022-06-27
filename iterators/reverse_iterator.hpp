@@ -11,11 +11,11 @@ namespace ft{
     template <class Iter> class ReverseIterator {
     public:
         typedef Iter                                                    iterator_type;
-        typedef typename ft::IteratorTraits <Iter>::iterator_category   iterator_category;
-        typedef typename ft::IteratorTraits <Iter>::value_type          value_type;
-        typedef typename ft::IteratorTraits <Iter>::difference_type     difference_type;
-        typedef typename ft::IteratorTraits <Iter>::pointer             pointer;
-        typedef typename ft::IteratorTraits <Iter>::reference           reference;
+        typedef typename iterator_traits <Iter>::iterator_category   iterator_category;
+        typedef typename iterator_traits <Iter>::value_type          value_type;
+        typedef typename iterator_traits <Iter>::difference_type     difference_type;
+        typedef typename iterator_traits <Iter>::pointer             pointer;
+        typedef typename iterator_traits <Iter>::reference           reference;
     private:
         iterator_type _it;
     public:
@@ -44,7 +44,7 @@ namespace ft{
         }
 
         ReverseIterator operator+(difference_type n) const {
-            return reverse_iterator(_it - n);
+            return ReverseIterator(_it - n);
         }
 
         ReverseIterator &operator++() {

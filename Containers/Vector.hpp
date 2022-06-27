@@ -17,7 +17,7 @@ namespace ft {
 		typedef T                                           value_type;
 		typedef std::size_t                                 size_type;
 		typedef std::ptrdiff_t                              difference_type;
-		typedef typename Allocator::allocator_type          allocator_type;
+        typedef Allocator                                   allocator_type;
 
 		typedef typename Allocator::pointer                 pointer;
 		typedef typename Allocator::const_pointer           const_pointer;

@@ -11,12 +11,12 @@ namespace ft {
     template<class Iter>
     class RandomAccessIterator {
     public:
-        typedef typename ft::IteratorTraits<Iter>::value_type value_type;
-        typedef typename ft::IteratorTraits<Iter>::pointer pointer;
-        typedef typename ft::IteratorTraits<Iter>::reference reference;
-        typedef typename ft::IteratorTraits<Iter>::difference_type difference_type;
-        typedef pointer iterator_type;
-        typedef std::random_access_iterator_tag iterator_category;
+        typedef typename iterator_traits<Iter>::value_type       value_type;
+        typedef typename iterator_traits<Iter>::pointer          pointer;
+        typedef typename iterator_traits<Iter>::reference        reference;
+        typedef typename iterator_traits<Iter>::difference_type  difference_type;
+        typedef pointer                                              iterator_type;
+        typedef std::random_access_iterator_tag                      iterator_category;
     private:
         pointer _it;
 
@@ -106,10 +106,6 @@ namespace ft {
             return (_it - rhs.base());
         }
 
-        /****
-        ** Assignment Operators
-        */
-
         RandomAccessIterator &operator+=(difference_type n) {
             _it += n;
             return *this;
@@ -119,10 +115,6 @@ namespace ft {
             _it -= n;
             return *this;
         };
-
-        /****
-        ** Base
-        */
 
         pointer base() const {
             return _it;

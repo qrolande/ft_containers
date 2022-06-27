@@ -5,19 +5,19 @@
 #ifndef FT_CONTAINERS_ITERATORTRAITS_HPP
 #define FT_CONTAINERS_ITERATORTRAITS_HPP
 
-#include "iostream"
+//#include "iostream"
 
 namespace ft {
-    template <class Iter> class IteratorTraits{
+    template <class Iterator> class iterator_traits{
     public:
-        typedef typename Iter::difference_type      difference_type;
-        typedef typename Iter::value_type           value_type;
-        typedef typename Iter::pointer              pointer;
-        typedef typename Iter::reference            reference;
-        typedef typename Iter::iterator_category    iterator_category;
+        typedef typename Iterator::difference_type      difference_type;
+        typedef typename Iterator::value_type           value_type;
+        typedef typename Iterator::pointer              pointer;
+        typedef typename Iterator::reference            reference;
+        typedef typename Iterator::iterator_category    iterator_category;
     };
 
-    template <class T> class IteratorTraits<T*>{
+    template <class T> class iterator_traits<T*>{
     public:
         typedef std::ptrdiff_t                  difference_type;
         typedef T                               value_type;
@@ -26,7 +26,7 @@ namespace ft {
         typedef std::random_access_iterator_tag iterator_category;
     };
 
-    template <class T> class IteratorTraits<const T*>{
+    template <class T> class iterator_traits<const T*>{
     public:
         typedef std::ptrdiff_t                  difference_type;
         typedef const T                         value_type;
