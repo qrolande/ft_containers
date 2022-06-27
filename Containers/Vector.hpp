@@ -7,27 +7,27 @@
 
 #include "iostream"
 #include "memory"
-#include "../iterators/reverse_iterator.hpp"
+#include "../other/libs.hpp"
 
 namespace ft {
 	template<class T,class Allocator = std::allocator<T> >
 	class vector {
 	public:
 		// types:
-		typedef T                                   value_type;
-		typedef std::size_t                         size_type;
-		typedef std::ptrdiff_t                      difference_type;
-		typedef typename Allocator::allocator_type  allocator_type;
+		typedef T                                           value_type;
+		typedef std::size_t                                 size_type;
+		typedef std::ptrdiff_t                              difference_type;
+		typedef typename Allocator::allocator_type          allocator_type;
 
-		typedef typename Allocator::pointer         pointer;
-		typedef typename Allocator::const_pointer   const_pointer;
-		typedef typename Allocator::reference       reference;
-		typedef typename Allocator::const_reference const_reference;
+		typedef typename Allocator::pointer                 pointer;
+		typedef typename Allocator::const_pointer           const_pointer;
+		typedef typename Allocator::reference               reference;
+		typedef typename Allocator::const_reference         const_reference;
 
-        typedef ft::random_access_iterator<value_type> iterator;
-        typedef ft::random_access_iterator<const value_type> const_iterator;
-        typedef ft::ReverseIterator<const_iterator> const_reverse_iterator;
-        typedef ft::ReverseIterator<iterator> reverse_iterator;
+        typedef ft::RandomAccessIterator<value_type>        iterator;
+        typedef ft::RandomAccessIterator<const value_type>  const_iterator;
+        typedef ft::ReverseIterator<iterator>               reverse_iterator;
+        typedef ft::ReverseIterator<const_iterator>         const_reverse_iterator;
 
 		//_2_Constructors and destructors
 		explicit vector(const allocator_type& alloc = allocator_type()):
@@ -395,6 +395,44 @@ namespace ft {
 		size_type   _size;      // размер
 		size_type   _capacity;  // емкость
 	};
+
+    template <typename T, class Alloc>
+    bool  operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+        if (lhs.size() == rhs.size())
+            return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+        else
+            return false;
+    }
+
+    template <typename T, class Alloc>
+    bool  operator!=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+        return !(lhs == rhs);
+    }
+
+    template <typename T, class Alloc>
+    void swap (const vector<T,Alloc> & lhs, const vector<T,Alloc> & rhs) {
+        lhs.swap(rhs);
+    }
+
+    template <typename T, class Alloc>
+    bool  operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+        return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+    }
+
+    template <typename T, class Alloc>
+    bool  operator<=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+        return !(rhs < lhs);
+    }
+
+    template <typename T, class Alloc>
+    bool  operator>(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+        return (rhs < lhs);
+    }
+
+    template <typename T, class Alloc>
+    bool  operator>=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+        return !(lhs < rhs);
+    }
 }
 
 #endif //FT_CONTAINERS_VECTOR_HPP
