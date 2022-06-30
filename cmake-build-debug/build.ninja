@@ -78,6 +78,12 @@ build CMakeFiles/ft_containers.dir/ft_main.cpp.o: CXX_COMPILER__ft_containers_De
   OBJECT_DIR = CMakeFiles/ft_containers.dir
   OBJECT_FILE_DIR = CMakeFiles/ft_containers.dir
 
+build CMakeFiles/ft_containers.dir/main.cpp.o: CXX_COMPILER__ft_containers_Debug /Users/qrolande/Desktop/ft_containers/main.cpp || cmake_object_order_depends_target_ft_containers
+  DEP_FILE = CMakeFiles/ft_containers.dir/main.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++98
+  OBJECT_DIR = CMakeFiles/ft_containers.dir
+  OBJECT_FILE_DIR = CMakeFiles/ft_containers.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target ft_containers
@@ -86,7 +92,7 @@ build CMakeFiles/ft_containers.dir/ft_main.cpp.o: CXX_COMPILER__ft_containers_De
 #############################################
 # Link the executable ft_containers
 
-build ft_containers: CXX_EXECUTABLE_LINKER__ft_containers_Debug CMakeFiles/ft_containers.dir/ft_main.cpp.o
+build ft_containers: CXX_EXECUTABLE_LINKER__ft_containers_Debug CMakeFiles/ft_containers.dir/ft_main.cpp.o CMakeFiles/ft_containers.dir/main.cpp.o
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6
   OBJECT_DIR = CMakeFiles/ft_containers.dir
   POST_BUILD = :

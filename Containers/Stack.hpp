@@ -11,31 +11,31 @@ namespace ft {
 	template < class Type, class Container = ft::vector <Type> >
 	class stack {
 	protected:
-		Container _c;
+		Container c;
 	public:
 		typedef typename Container::value_type  value_type;
 		typedef typename Container::size_type   size_type;
 		typedef          Container              container_type;
 
-//		stack(): _c() {};
-		explicit stack(const Container &cont = Container()): _c(cont) {}
+//		stack(): c() {};
+		explicit stack(const Container &cont = Container()): c(cont) {}
 //		explicit stack(const Container& = Container()){};
-		stack(const stack<Type, Container>& other_cont): _c(other_cont._c) {}
-		~stack() { _c.clear(); }
+		stack(const stack<Type, Container>& other_cont): c(other_cont.c) {}
+		~stack() { c.clear(); }
 
-		bool                empty() const               { return _c.empty(); }
-		size_type           size() const                { return _c.size(); }
-		value_type&         top()                       { return _c.back(); }
-		const value_type&   top() const                 { return _c.back(); }
-		void                push(const value_type& x)   { _c.push_back(x); }
-		void                pop()                       { _c.pop_back(); }
+		bool                empty() const               { return c.empty(); }
+		size_type           size() const                { return c.size(); }
+		value_type&         top()                       { return c.back(); }
+		const value_type&   top() const                 { return c.back(); }
+		void                push(const value_type& x)   { c.push_back(x); }
+		void                pop()                       { c.pop_back(); }
 
-		bool                eq(const stack<Type, Container>& other_cont) const { return (_c == other_cont._c);}
-		bool                eq_not(const stack<Type, Container>& other_cont) const { return (_c != other_cont._c);}
-		bool                less(const stack<Type, Container>& other_cont) const { return (_c < other_cont._c);}
-		bool                more(const stack<Type, Container>& other_cont) const { return (_c > other_cont._c);}
-		bool                less_and_eq(const stack<Type, Container>& other_cont) const { return (_c <= other_cont._c);}
-		bool                more_and_eq(const stack<Type, Container>& other_cont) const { return (_c >= other_cont._c);}
+		bool                eq(const stack<Type, Container>& other_cont) const { return (c == other_cont.c);}
+		bool                eq_not(const stack<Type, Container>& other_cont) const { return (c != other_cont.c);}
+		bool                less(const stack<Type, Container>& other_cont) const { return (c < other_cont.c);}
+		bool                more(const stack<Type, Container>& other_cont) const { return (c > other_cont.c);}
+		bool                less_and_eq(const stack<Type, Container>& other_cont) const { return (c <= other_cont.c);}
+		bool                more_and_eq(const stack<Type, Container>& other_cont) const { return (c >= other_cont.c);}
 
 	};
 		template <class T, class C>

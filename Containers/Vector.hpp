@@ -14,27 +14,27 @@ namespace ft {
 	class vector {
 	public:
 		// types:
-		typedef T                                           value_type;
-		typedef std::size_t                                 size_type;
-		typedef std::ptrdiff_t                              difference_type;
-        typedef Allocator                                   allocator_type;
+		typedef T                                                  value_type;
+		typedef std::size_t                                        size_type;
+		typedef std::ptrdiff_t                                     difference_type;
+        typedef Allocator                                          allocator_type;
 
-		typedef typename Allocator::pointer                 pointer;
-		typedef typename Allocator::const_pointer           const_pointer;
-		typedef typename Allocator::reference               reference;
-		typedef typename Allocator::const_reference         const_reference;
+		typedef typename allocator_type::pointer                   pointer;
+		typedef typename allocator_type::const_pointer             const_pointer;
+		typedef typename allocator_type::reference                 reference;
+		typedef typename allocator_type::const_reference           const_reference;
 
-        typedef ft::RandomAccessIterator<value_type>        iterator;
-        typedef ft::RandomAccessIterator<const value_type>  const_iterator;
-        typedef ft::ReverseIterator<iterator>               reverse_iterator;
-        typedef ft::ReverseIterator<const_iterator>         const_reverse_iterator;
+        typedef ft::random_access_iterator<value_type>             iterator;
+        typedef ft::random_access_iterator<const value_type>       const_iterator;
+        typedef ft::reverse_iterator<iterator>                     reverse_iterator;
+        typedef ft::reverse_iterator<const_iterator>               const_reverse_iterator;
 
 		//_2_Constructors and destructors
 		explicit vector(const allocator_type& alloc = allocator_type()):
-			_start(0),
+            _alloc(alloc),
+            _start(0),
 			_size(0),
-			_capacity(0),
-			_alloc(alloc) {};
+			_capacity(0) {};
 
 		explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()):
 			_size(n),
@@ -141,8 +141,8 @@ namespace ft {
 
 		//_4_Element_access
 		//возвращают ссылку на первый элемент вектора
-		reference front(){ return(*_start); };
-		const_reference front() const { return(*_start); };
+		reference front(){ return(*(_start)); };
+		const_reference front() const { return(*(_start)); };
 
 		//возращает ссылку на последний элемент вектора
 		reference back(){ return(*(_start + _size - 1)); };
@@ -167,14 +167,15 @@ namespace ft {
 		};
 
         // Iterators
-        iterator begin() {return (iterator(_start)); };                                           //итератор на первый элемент
-        const_iterator begin() const { return(const_iterator(_start)); };                         // конст итератор на первый элемент
-        iterator end(){ return(iterator(_start + _size)); };                                      // итератор на последний элемент
-        const_iterator end() const { return(const_iterator(_start + _size)); };                   // конст итератор на последний элемент
-        reverse_iterator rbegin(){ return (reverse_iterator(this->end())); };                     // реверс итератор на конец
-        const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->end())); };  // конст реверс итератор на конец
-        reverse_iterator rend(){ return (reverse_iterator(this->begin())); };                     // итератор на первый элемент
-        const_reverse_iterator rend() const { return (const_reverse_iterator(this->begin())); };  // конст итератор на первый элемент
+        iterator begin() {return (iterator(_start)); };                                             //итератор на первый элемент
+        const_iterator begin() const { return(const_iterator(_start)); };                           // конст итератор на первый элемент
+        iterator end(){ return(iterator(_start + _size)); };                                        // итератор на последний элемент
+        const_iterator end() const { return(const_iterator(_start + _size)); };                     // конст итератор на последний элемент
+        reverse_iterator rbegin(){ return (reverse_iterator(_start + _size)); };                    // реверс итератор на конец
+        const_reverse_iterator rbegin() const { return (const_reverse_iterator(_start + _size)); }; // конст реверс итератор на конец
+        reverse_iterator rend(){ return (reverse_iterator(_start)); };                              // итератор на первый элемент
+        const_reverse_iterator rend() const { return (const_reverse_iterator(_start)); };           // конст итератор на первый элемент
+
 
 		//_4_Modifiers:
 
@@ -199,10 +200,11 @@ namespace ft {
         }
 
         void clear(){
-            for(size_type i = 0; i < _size; i++){
-                _alloc.destroy(_start + i);
-            }
-            _size = 0;
+//            for(size_type i = 0; i < _size; i++){
+//                _alloc.destroy(_start + i);
+//            }
+//            _size = 0;
+            resize(0);
         };
 
         void assign (size_type count, const value_type &val){
@@ -380,12 +382,20 @@ namespace ft {
         }
 
         void swap (vector &x){
-			if (this != &x){
-				std::swap(_start, x._start);
-				std::swap(_size, x._size);
-				std::swap(_capacity, x._capacity);
-				std::swap(_alloc, x._alloc);
-			}
+            allocator_type	tmp_alloc = _alloc;
+            pointer			tmp_start = _start;
+            size_type		tmp_size = _size;
+            size_type		tmp_capacity = _capacity;
+
+            _alloc = x._alloc;
+            _start = x._start;
+            _size = x._size;
+            _capacity = x._capacity;
+
+            x._alloc = tmp_alloc;
+            x._start = tmp_start;
+            x._size = tmp_size;
+            x._capacity = tmp_capacity;
 		};
 
 
