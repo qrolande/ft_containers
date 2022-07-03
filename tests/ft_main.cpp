@@ -125,7 +125,7 @@ void vector_test()
     }
 
     clock_t g_end = clock();
-    std::cout << "Time: " << (double)(g_end - g_start) / CLOCKS_PER_SEC * 1000 << std::endl;
+    std::cout << "Vector time: " << (double)(g_end - g_start) / CLOCKS_PER_SEC * 1000 << "ms" << std::endl;
 }
 
 /*
@@ -183,7 +183,7 @@ void stack_test()
     std::cout << "s3 empty: " << (s3.empty() ? "true" : "false") << std::endl;
 
     clock_t g_end = clock();
-    std::cout << "Time: " << (double)(g_end - g_start) / CLOCKS_PER_SEC * 1000 << std::endl;
+    std::cout << "Stack time: " << (double)(g_end - g_start) / CLOCKS_PER_SEC * 1000 << "ms" << std::endl;
 }
 
 /*
@@ -290,7 +290,7 @@ void map_test() {
     }
 
     clock_t g_end = clock();
-    std::cout << "Time: " << (double)(g_end - g_start) / CLOCKS_PER_SEC * 1000 << std::endl;
+    std::cout << "Map time: " << (double)(g_end - g_start) / CLOCKS_PER_SEC * 1000 << "ms" << std::endl;
 }
 
 /*
