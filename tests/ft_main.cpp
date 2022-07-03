@@ -4,9 +4,9 @@
 
 #include <time.h>
 #include <iostream>
-//#include "map.hpp"
-#include "Containers/Stack.hpp"
-#include "Containers/Vector.hpp"
+#include "../Containers/Vector.hpp"
+#include "../Containers/Stack.hpp"
+#include "../Containers/Map.hpp"
 
 /*
  **=========================================================================
@@ -192,93 +192,106 @@ void stack_test()
  **=========================================================================
  */
 
-//static void printMap(const ft::map<std::string, int> &m)
-//{
-//    std::cout << '{';
-//    ft::map<std::string, int>::const_iterator b = m.begin();
-//    ft::map<std::string, int>::const_iterator e = m.end();
-//    while (b != e)
-//    {
-//        std::cout << b->first << ':' << b->second << ' ';
-//        b++;
-//    }
-//    std::cout << "}\n";
-//}
+static void printMap(const ft::map<std::string, int> &m) {
+    std::cout << '{';
+    ft::map<std::string, int>::const_iterator b = m.begin();
+    ft::map<std::string, int>::const_iterator e = m.end();
+    while (b != e)  {
+        std::cout << b->first << ':' << b->second << ' ';
+        b++;
+    }
+    std::cout << "}\n";
+}
 
-//void map_test()
-//{
-//    clock_t g_start = clock();
-//
-//    ft::map<std::string, int> m1;
-//    m1["A"] = 20;
-//    m1["B"] = 70;
-//    m1["C"] = 100;
-//    m1["D"] = 500;
-//    std::cout << "m1: ";
-//    printMap(m1);
-//
-//    ft::map<std::string, int> m2(m1.find("B"), m1.end());
-//    std::cout << "m2: ";
-//    printMap(m2);
-//
-//    ft::map<std::string, int> m3(m1);
-//    std::cout << "m3: ";
-//    printMap(m3);
-//
-//    std::cout << "m3[no key] with []: " << m3["no key"]
-//              << std::endl;
-//    printMap(m3);
-//
-//    ft::map<std::string, int>::reverse_iterator r_it = m3.rbegin();
-//    std::cout << '{';
-//    for (; r_it != m3.rend(); r_it++)
-//    {
-//        std::cout << r_it->first << ':' << r_it->second << ' ';
-//    }
-//    std::cout << "}\n";
-//
-//    std::cout << "m3 empty: " << (m3.empty() ? "true" : "false") << std::endl;
-//    std::cout << "m3 size: " << m3.size() << std::endl;
-//
-//    std::cout << "m3 clear\n";
-//    m3.clear();
-//    std::cout << "m3 size: " << m3.size() << std::endl;
-//    std::cout << "m3 insert (from m2)\n";
-//    m3.insert(m2.begin(), m2.end());
-//    std::cout << "m3 size: " << m3.size() << std::endl;
-//    std::cout << "m3: ";
-//    printMap(m3);
-//
-//    std::cout << "erase 'C'\n";
-//    m3.erase(m3.find("C"));
-//    std::cout << "erase 'no key'\n";
-//    m3.erase("no key");
-//    std::cout << "m3: ";
-//    printMap(m3);
-//
-//    m3.swap(m2);
-//    std::cout << "m3: ";
-//    printMap(m3);
-//
-//    std::cout << "m3 == m2: " << (m3 == m2 ? "true" : "false") << std::endl;
-//    std::cout << "m3 < m2: " << (m3 < m2 ? "true" : "false") << std::endl;
-//    std::cout << "m3 >= m2: " << (m3 >= m2 ? "true" : "false") << std::endl;
-//
-//    ft::map<int, int> mp4;
-//    for (int i = 0, j = 100; i < 300000; i++, j++)
-//    {
-//        mp4.insert(ft::make_pair(i * 2, j));
-//    }
-//    std::cout << "count 41: " << mp4.count(41) << std::endl;
-//    std::cout << "count 50: " << mp4.count(50) << std::endl;
-//    std::cout << "count 300005: " << mp4.count(300005) << std::endl;
-//    std::cout << "find 26: " << mp4.find(26)->first << std::endl;
-//    std::cout << "lower bound 127: " << mp4.lower_bound(127)->first << std::endl;
-//    std::cout << "upper bound 244: " << mp4.upper_bound(244)->first << std::endl;
-//
-//    clock_t g_end = clock();
-//    std::cout << "Time: " << (double)(g_end - g_start) / CLOCKS_PER_SEC * 1000 << std::endl;
-//}
+void map_test() {
+    clock_t g_start = clock();
+
+    ft::map<std::string, int> m1;
+    m1["A"] = 20;
+    m1["B"] = 70;
+    m1["C"] = 100;
+    m1["D"] = 500;
+    std::cout << "m1: ";
+    printMap(m1);
+
+    ft::map<std::string, int> m2(m1.find("B"), m1.end());
+    std::cout << "m2: ";
+    printMap(m2);
+
+    ft::map<std::string, int> m3(m1);
+    std::cout << "m3: ";
+    printMap(m3);
+
+    std::cout << "m3[no key] with []: " << m3["no key"]
+              << std::endl;
+    printMap(m3);
+
+    ft::map<std::string, int>::reverse_iterator r_it = m3.rbegin();
+    std::cout << '{';
+    for (; r_it != m3.rend(); r_it++)
+    {
+        std::cout << r_it->first << ':' << r_it->second << ' ';
+    }
+    std::cout << "}\n";
+
+    std::cout << "m3 empty: " << (m3.empty() ? "true" : "false") << std::endl;
+    std::cout << "m3 size: " << m3.size() << std::endl;
+
+    std::cout << "m3 clear\n";
+    m3.clear();
+    std::cout << "m3 size: " << m3.size() << std::endl;
+    std::cout << "m3 insert (from m2)\n";
+    m3.insert(m2.begin(), m2.end());
+    std::cout << "m3 size: " << m3.size() << std::endl;
+    std::cout << "m3: ";
+    printMap(m3);
+
+    std::cout << "erase 'C'\n";
+    m3.erase(m3.find("C"));
+    std::cout << "erase 'no key'\n";
+    m3.erase("no key");
+    std::cout << "m3: ";
+    printMap(m3);
+
+    m3.swap(m2);
+    std::cout << "m3: ";
+    printMap(m3);
+
+    std::cout << "m3 == m2: " << (m3 == m2 ? "true" : "false") << std::endl;
+    std::cout << "m3 < m2: " << (m3 < m2 ? "true" : "false") << std::endl;
+    std::cout << "m3 >= m2: " << (m3 >= m2 ? "true" : "false") << std::endl;
+    {
+        ft::map<int, int> m4;
+        for (int i = 0, j = 50; i < 10000; i++, j++) {
+            m4.insert(ft::make_pair(i * 2, j));
+        }
+        std::cout << "count 41: " << m4.count(41) << std::endl;
+        std::cout << "count 50: " << m4.count(50) << std::endl;
+        std::cout << "count 300005: " << m4.count(300005) << std::endl;
+        std::cout << "find 26: " << m4.find(26)->first << std::endl;
+        std::cout << "lower bound 69: " << m4.lower_bound(69)->first << std::endl;
+        std::cout << "upper bound 200: " << m4.upper_bound(200)->first << std::endl;
+    }
+    {
+        ft::map<char,int> m5;
+
+        m5['a']=10;
+        m5['b']=20;
+        m5['c']=30;
+
+        ft::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> ret;
+        ret = m5.equal_range('b');
+
+        std::cout << "lower bound points to: ";
+        std::cout << ret.first->first << " => " << ret.first->second << '\n';
+
+        std::cout << "upper bound points to: ";
+        std::cout << ret.second->first << " => " << ret.second->second << '\n';
+    }
+
+    clock_t g_end = clock();
+    std::cout << "Time: " << (double)(g_end - g_start) / CLOCKS_PER_SEC * 1000 << std::endl;
+}
 
 /*
  **=========================================================================
@@ -298,10 +311,10 @@ int main()
     stack_test();
     std::cout << std::endl;
 
-//    std::cout << "\n***** MAP TEST *****\n"
-//              << std::endl;
-//    map_test();
-//    std::cout << std::endl;
+    std::cout << "\n***** MAP TEST *****\n"
+              << std::endl;
+    map_test();
+    std::cout << std::endl;
 
     return 0;
 }

@@ -12,5 +12,7 @@
 #include "equal.hpp"
 #include "lexicographical_compare.hpp"
 #include "pair.hpp"
+#include "Node.hpp"
+#include "../iterators/bidirectional_iterator.hpp"
 
 #endif //FT_CONTAINERS_LIBS_HPP

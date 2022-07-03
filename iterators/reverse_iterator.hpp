@@ -27,81 +27,68 @@ namespace ft{
         reverse_iterator(const reverse_iterator<Iter> &rev_it) : _it(rev_it.base()) {}
 
         template <typename U>
-        reverse_iterator &operator=(const reverse_iterator<U> &rit)
-        {
+        reverse_iterator &operator=(const reverse_iterator<U> &rit) {
             _it = rit.base();
             return (*this);
         }
 
-        iterator_type base() const
-        {
+        iterator_type base() const {
             return _it;
         }
 
-        reference operator*() const
-        {
+        reference operator*() const {
             iterator_type tmp;
             tmp = _it;
             tmp--;
             return *tmp;
         }
 
-        reverse_iterator operator+(difference_type n) const
-        {
+        reverse_iterator operator+(difference_type n) const {
             return reverse_iterator(_it - n);
         }
 
-        reverse_iterator &operator++()
-        {
+        reverse_iterator &operator++() {
             _it--;
             return *this;
         }
 
-        reverse_iterator operator++(int)
-        {
+        reverse_iterator operator++(int) {
             reverse_iterator tmp = *this;
             _it--;
             return tmp;
         }
 
-        reverse_iterator &operator+=(difference_type n)
-        {
+        reverse_iterator &operator+=(difference_type n) {
             _it -= n;
             return *this;
         }
 
-        reverse_iterator operator-(difference_type n) const
-        {
+        reverse_iterator operator-(difference_type n) const {
             reverse_iterator rev_it = *this;
             return (rev_it -= n);
         }
 
-        reverse_iterator &operator--()
-        {
+        reverse_iterator &operator--() {
             _it++;
             return *this;
         }
 
-        reverse_iterator operator--(int)
-        {
+        reverse_iterator operator--(int) {
             reverse_iterator tmp = *this;
             _it++;
             return tmp;
         }
 
-        reverse_iterator &operator-=(difference_type n)
-        {
+        reverse_iterator &operator-=(difference_type n) {
             _it += n;
             return *this;
         }
 
-        pointer operator->() const
-        {
+        pointer operator->() const {
             return &(operator*());
         }
 
-        reference operator[](difference_type n) const
-        {
+        reference operator[](difference_type n) const {
             return (*(_it - (n + 1)));
         }
 

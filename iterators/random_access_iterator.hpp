@@ -15,8 +15,8 @@ namespace ft {
         typedef typename iterator_traits<Iter *>::pointer          pointer;
         typedef typename iterator_traits<Iter *>::reference        reference;
         typedef typename iterator_traits<Iter *>::difference_type  difference_type;
-        typedef pointer                                          iterator_type;
-        typedef std::random_access_iterator_tag                  iterator_category;
+        typedef pointer                                            iterator_type;
+        typedef std::random_access_iterator_tag                    iterator_category;
     private:
         pointer _it;
     public:
@@ -37,15 +37,7 @@ namespace ft {
             return *this;
         };
 
-        /****
-        ** Destructor
-        */
-
         ~random_access_iterator() {};
-
-        /****
-        ** Dereferences
-        */
 
         reference operator*() const {
             return *_it;
@@ -59,39 +51,27 @@ namespace ft {
             return _it[n];
         };
 
-        /****
-        ** Increment and Decrement Operators
-        */
-
-        // ++ Prefix
         random_access_iterator &operator++() {
             ++_it;
             return *this;
         };
 
-        // Postfix ++
         random_access_iterator operator++(int) {
             random_access_iterator temp;
             temp._it = _it++;
             return temp;
         };
 
-        // -- Prefix
         random_access_iterator &operator--() {
             --_it;
             return *this;
         };
 
-        // Postfix --
         random_access_iterator operator--(int) {
             random_access_iterator temp;
             temp._it = _it--;
             return temp;
         };
-
-        /****
-        ** Arithmetic Operators
-        */
 
         random_access_iterator operator+(difference_type n) {
             return (this->_it + n);
@@ -179,10 +159,6 @@ namespace ft {
     inline bool operator>=(const random_access_iterator<Iterator> &lhs, const random_access_iterator<Iterator> &rhs) {
         return (lhs.base() >= rhs.base());
     }
-
-/****
-** Arithmetic Operators
-*/
 
     template<typename IteratorL, typename IteratorR>
     inline typename random_access_iterator<IteratorL>::difference_type

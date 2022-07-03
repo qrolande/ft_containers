@@ -43,7 +43,7 @@ namespace ft {
 		{
 			_start = _alloc.allocate(n);
 			for(size_type i = 0; i < n; i++)
-				_alloc.construct(_start + i, val); //заполняем каждый элемент вектора дефолтным значением.(0, "")
+				_alloc.construct(_start + i, val);
 		};
 
 		vector(const vector& right):_size(0), _capacity(0) { *this = right; };
@@ -200,11 +200,10 @@ namespace ft {
         }
 
         void clear(){
-//            for(size_type i = 0; i < _size; i++){
-//                _alloc.destroy(_start + i);
-//            }
-//            _size = 0;
-            resize(0);
+            for(size_type i = 0; i < _size; i++){
+                _alloc.destroy(_start + i);
+            }
+            _size = 0;
         };
 
         void assign (size_type count, const value_type &val){
@@ -239,7 +238,7 @@ namespace ft {
         template<class Input>
         void insert(iterator position, Input start, Input last, typename enable_if<!is_integral<Input>::value>::type* = 0){
             if (position < begin() || position > end() || start > last)
-                throw std::logic_error("vector");
+                throw std::logic_error("out of range");
             size_t distance = static_cast<size_t>(position - begin());
             size_t countElements = static_cast<size_t>(last - start);
             if (_size + countElements > _capacity){
@@ -278,7 +277,7 @@ namespace ft {
         //добавление одного элемента на определенное место
         iterator insert(iterator position, const value_type& val){
             if (position < begin() || position > end())
-                throw std::logic_error("vector");
+                throw std::logic_error("out of range");
             difference_type distance = position - begin();
             if (_size == _capacity){
                 if (_capacity == 0){
@@ -313,7 +312,7 @@ namespace ft {
             if (n == 0)
                 return;
             else if (max_size() - _size < n){
-                throw std::length_error("vector");
+                throw std::length_error("out of range");
             }
             difference_type distance = position - begin();
             if (_size + n > _capacity){
