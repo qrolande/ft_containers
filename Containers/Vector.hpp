@@ -37,9 +37,9 @@ namespace ft {
 			_capacity(0) {};
 
 		explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()):
+			_alloc(alloc),
 			_size(n),
-			_capacity(n),
-			_alloc(alloc)
+			_capacity(n)
 		{
 			_start = _alloc.allocate(n);
 			for(size_type i = 0; i < n; i++)
@@ -95,48 +95,39 @@ namespace ft {
 
 		//внутренняя функция резерв, позволяет нам зарезервировать память
 		void reserve(size_type n){
-			if (n > this->max_size())
-				throw (std::length_error("vector too long"));
-			pointer new_arr = _alloc.allocate(n);
-			try{
-				for(size_type i = 0; i < _size; i++)
-					_alloc.construct(new_arr + i, *(_start + i));
-			} catch (std::exception &e){
-				size_type i = 0;
-				while (new_arr + i != NULL && i < this->_size) {
-					_alloc.destroy(new_arr + i);
-					i++;
-				}
-				_alloc.deallocate(new_arr, n);
-				throw ;
-			}
-			for (size_type i = 0; i < _size; i++){
-				_alloc.destroy(_start + i);
-			}
-			if (_capacity != 0)
-				_alloc.deallocate(_start, _capacity);
-			_capacity = n;
-			_start = new_arr;
+            if (n > max_size())
+                throw (std::length_error("reserve : over max size"));
+            if  (n < _capacity)
+                return;
+            if (n > _capacity) {
+                pointer	tmp = _alloc.allocate(n);
+                for(size_type i = 0; i < _size; ++i) {
+                    _alloc.construct(tmp + i, _start[i]);
+                    _alloc.destroy(_start + i);
+                }
+                if (_capacity != 0)
+                    _alloc.deallocate(_start, _capacity);
+                _start = tmp;
+                _capacity = n;
+            }
 		};
 
 		//функция resize увеличивает или уменьшает аллоцированную память до необходимого нам значения.
-		void resize(size_type resize_size, value_type value = value_type()){
-			if (resize_size < this->_size){
-				for(size_type i = resize_size; i < this->_size; i++)
-					_alloc.destroy(_start + i);
-				this->_size = resize_size;
-			} else if (resize_size > this->_size){
-				if (this->_capacity < resize_size){
-					if (this->_capacity * 2 > resize_size)
-						this->reserve(_capacity * 2);
-					else
-						this->reserve(resize_size);
-				}
-				for (size_type i = this->_size; i < resize_size; i++){
-					_alloc.construct(_start + i, value);
-					this->_size++;
-				}
-			}
+		void resize(size_type n, value_type value = value_type()){
+            if (n < _size) {
+                for (size_type i = n; i < _size; i++) {
+                    _alloc.destroy(_start + i);
+                }
+            }
+            else {
+                if (n > 2 * _capacity)
+                    reserve(n);
+                else if (n < 2 * _capacity && n > _capacity)
+                    reserve(2 * _capacity);
+                for (size_type i = _size; i < n; i++)
+                    _alloc.construct(_start + i, value);
+            }
+            _size = n;
 		};
 
 		//_4_Element_access
@@ -276,35 +267,26 @@ namespace ft {
 
         //добавление одного элемента на определенное место
         iterator insert(iterator position, const value_type& val){
-            if (position < begin() || position > end())
-                throw std::logic_error("out of range");
-            difference_type distance = position - begin();
-            if (_size == _capacity){
-                if (_capacity == 0){
-                    _capacity = 1;
-                } else {
-                    _capacity = _capacity * 2;
+            size_type pos = position - begin();
+            size_type diff_until_end = end() - position;
+
+            if (diff_until_end > 0) {
+                if (_capacity == 0) {
+                    reserve(1);
                 }
-                pointer newArr = _alloc.allocate(_capacity);
-                std::uninitialized_copy(begin(), position, iterator(newArr));
-                _alloc.construct(newArr + distance, val);
-                std::uninitialized_copy(position, end(), iterator(newArr + distance + 1));
-                for (size_t i = 0; i < _size; i++){
-                    _alloc.destroy(_start + i);
+                else if (_capacity == _size) {
+                    reserve(_capacity * 2);
                 }
-                _alloc.deallocate(_start, _size);
                 _size++;
-                _start = newArr;
-            } else {
-                for(size_type i = _size - 1; i > static_cast<size_type>(distance); i--){
-                    _alloc.destroy(_start + i);
-                    _alloc.construct(_start + i, *(_start + i - 1));
+                for (size_type size_temp = _size - 1; pos < size_temp ; size_temp--) {
+                    _alloc.construct(_start + size_temp, *(_start + size_temp - 1));
+                    _alloc.destroy(_start + size_temp - 1);
                 }
-                _alloc.destroy(&(*position));
-                _alloc.construct(&(*position), val);
-                _size++;
+                _alloc.construct(_start + pos, val);
             }
-            return (begin() + distance);
+            else
+                this->push_back(val);
+            return (iterator(_start + pos));
         };
 
         //вставка n элементов val на определенное место
