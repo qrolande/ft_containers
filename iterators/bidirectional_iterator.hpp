@@ -12,9 +12,9 @@ namespace ft {
     template < class T >
     class bidirectional_iterator {
     private:
-        node<T> *	_ptr;
-        node<T> *	_end;
-        node<T> *	_rend;
+        node<T>	*_ptr;
+        node<T> *_end;
+        node<T>	*_rend;
 
         bool	_is_rightmost_node() {
             node<T> *tmp = _ptr;
