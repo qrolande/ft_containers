@@ -17,9 +17,7 @@ namespace ft {
 		typedef typename Container::size_type   size_type;
 		typedef          Container              container_type;
 
-//		stack(): c() {};
 		explicit stack(const Container &cont = Container()): c(cont) {}
-//		explicit stack(const Container& = Container()){};
 		stack(const stack<Type, Container>& other_cont): c(other_cont.c) {}
 		~stack() { c.clear(); }
 
@@ -39,22 +37,22 @@ namespace ft {
 
 	};
 		template <class T, class C>
-		bool operator==(const stack<T, C>& x, const stack<T, C>& y) {return (x.eq(y));}
+		bool operator==(const stack<T, C>&x, const stack<T, C>&y) {return (x.eq(y));}
 
 		template <class T, class C>
-		bool operator<(const stack<T, C>& x, const stack<T, C>& y) {return (x.less(y));}
+		bool operator<(const stack<T, C>&x, const stack<T, C>&y) {return (x.less(y));}
 
 		template <class T, class C>
-		bool operator!=(const stack<T, C>& x, const stack<T, C>& y) {return (x.eq_not(y));}
+		bool operator!=(const stack<T, C>&x, const stack<T, C>&y) {return (x.eq_not(y));}
 
 		template <class T, class C>
-		bool operator>(const stack<T, C>& x, const stack<T, C>& y) {return (x.more(y));}
+		bool operator>(const stack<T, C>&x, const stack<T, C>&y) {return (x.more(y));}
 
 		template <class T, class C>
-		bool operator>=(const stack<T, C>& x, const stack<T, C>& y) {return (x.more_and_eq(y));}
+		bool operator>=(const stack<T, C>&x, const stack<T, C>&y) {return (x.more_and_eq(y));}
 
 		template <class T, class C>
-		bool operator<=(const stack<T, C>& x, const stack<T, C>& y) {return (x.less_and_eq(y));}
+		bool operator<=(const stack<T, C>&x, const stack<T, C>&y) {return (x.less_and_eq(y));}
 
 }
 

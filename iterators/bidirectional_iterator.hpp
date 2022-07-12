@@ -17,7 +17,7 @@ namespace ft {
         node<T> *	_rend;
 
         bool	_is_rightmost_node() {
-            node<T> *	tmp = _ptr;
+            node<T> *tmp = _ptr;
 
             while (tmp && tmp->parent)
                 tmp = tmp->parent;
@@ -29,7 +29,7 @@ namespace ft {
         }
 
         bool	_is_leftmost_node() {
-            node<T> *	tmp = _ptr;
+            node<T> *tmp = _ptr;
 
             while (tmp && tmp->parent)
                 tmp = tmp->parent;
@@ -49,7 +49,7 @@ namespace ft {
         typedef typename ft::map_iterator_traits<T>::iterator_category	iterator_category;
 
         bidirectional_iterator (void) : _ptr(NULL) {}
-        bidirectional_iterator (node<T> * new_ptr) : _ptr(new_ptr), _end(_ptr->_end), _rend(_ptr->_rend) {}
+        bidirectional_iterator (node<T> *new_ptr) : _ptr(new_ptr), _end(_ptr->_end), _rend(_ptr->_rend) {}
         ~bidirectional_iterator (void) {}
         bidirectional_iterator (const bidirectional_iterator &src) : _ptr(src._ptr), _end(_ptr->_end), _rend(_ptr->_rend) {}
         bidirectional_iterator &operator=(const bidirectional_iterator &src) {
@@ -64,22 +64,22 @@ namespace ft {
             return ret;
         }
 
-        bool    operator==(const bidirectional_iterator & rhs) const {
+        bool    operator==(const bidirectional_iterator &rhs) const {
             return _ptr == rhs._ptr;
         }
-        bool    operator!=(const bidirectional_iterator & rhs) const {
+        bool    operator!=(const bidirectional_iterator &rhs) const {
             return _ptr != rhs._ptr;
         }
-        bool    operator<(const bidirectional_iterator & rhs) const {
+        bool    operator<(const bidirectional_iterator &rhs) const {
             return _ptr < rhs._ptr;
         }
-        bool    operator>(const bidirectional_iterator & rhs) const {
+        bool    operator>(const bidirectional_iterator &rhs) const {
             return _ptr > rhs._ptr;
         }
-        bool    operator<=(const bidirectional_iterator & rhs) const {
+        bool    operator<=(const bidirectional_iterator &rhs) const {
             return _ptr <= rhs._ptr;
         }
-        bool    operator>=(const bidirectional_iterator & rhs) const {
+        bool    operator>=(const bidirectional_iterator &rhs) const {
             return _ptr >= rhs._ptr;
         }
 
@@ -87,13 +87,13 @@ namespace ft {
             return ((*_ptr).data);
         }
 
-        reference   operator[](const int & offset) const {
+        reference   operator[](const int &offset) const {
             bidirectional_iterator tmp(_ptr);
             tmp += offset;
             return *(tmp);
         }
 
-        pointer operator-> () const {
+        pointer operator->() const {
             return &(operator*());
         }
 
@@ -101,7 +101,7 @@ namespace ft {
             *(_ptr)->data = ref;
         }
 
-        bidirectional_iterator &operator++(void) {
+        bidirectional_iterator	&operator++(void) {
             if (_ptr == _end)
                 return *this;
             if (_ptr && _ptr->right) {
@@ -183,7 +183,7 @@ namespace ft {
             return *this;
         }
 
-        node<T> *get_ptr() const {
+        node<T>	*get_ptr() const {
             return _ptr;
         }
     };
