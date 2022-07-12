@@ -398,8 +398,6 @@ void mainMap()
     printmap(l);
     ft::map <int, int> :: iterator u1 = l.begin();
     ft::map <int, int> :: iterator u2 = l.end();
-    u1 = l.find(4);
-    std::cout << "|iterator find| " << u1->second << std::endl;
     ft::map <int, int> :: const_iterator h1 = l.begin();
     ft::map <int, int> :: const_iterator h2;
     h2 = l.find(111);
